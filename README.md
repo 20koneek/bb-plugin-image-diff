@@ -1,4 +1,4 @@
-# bb-plugin-imgdiff
+# bb-plugin-image-diff
 
 Pixel diff of changed images in BB, modelled on IntelliJ's
 [imgdiff](https://github.com/ehmkah/imgdiff): Before, Diff and After side by
@@ -41,7 +41,7 @@ no tolerance, like imgdiff. The only server code is a host entry that resolves
 an LFS object id with `git lfs smudge`.
 
 ```
-npm test          # pixel-diff unit test (node --test, no framework)
+npm test          # unit tests (node --test, no framework)
 npm run typecheck
 bb plugin build
 bb plugin install .

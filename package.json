@@ -1,6 +1,17 @@
 {
-  "name": "bb-plugin-imgdiff",
+  "name": "bb-plugin-image-diff",
   "version": "0.1.0",
+  "description": "Pixel diff of changed images in BB: Before, Diff and After side by side, with Git LFS images rendered inside the Diff tab.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/20koneek/bb-plugin-image-diff.git"
+  },
+  "homepage": "https://github.com/20koneek/bb-plugin-image-diff#readme",
+  "author": {
+    "name": "Pavel Serezhin",
+    "url": "https://github.com/20koneek"
+  },
   "type": "module",
   "engines": {
     "bb": ">=0.48",
@@ -8,14 +19,18 @@
   },
   "bb": {
     "name": "Image Diff",
-    "description": "Pixel diff of changed images, like IntelliJ's imgdiff: Before, Diff and After side by side with white, original and blinking modes, in a thread tab and when opening a changed image.",
+    "description": "See exactly which pixels changed in an image before you approve it. Before, Diff and After sit side by side, with changed pixels highlighted over a white background, over the new image, or blinking, plus a changed-pixel count. Git LFS images render in place in BB's Diff tab, downloading missing objects on demand. A pinned Image diff tab lists every changed image in the thread, and opening a changed image anywhere shows its diff. LFS images need git-lfs on the host.",
     "branding": {
-      "icon": "Images"
+      "icon": "./assets/icon.svg"
     },
     "server": "./server.ts",
     "app": "./app.tsx",
     "skills": [],
     "host": "./host.ts"
+  },
+  "scripts": {
+    "test": "node --test pixel-diff.test.ts lfs.test.ts",
+    "typecheck": "tsc -p ."
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.3.0",
@@ -47,9 +62,5 @@
     "sonner": "^1.7.4",
     "tailwind-merge": "^3.4.0",
     "vaul": "^1.1.2"
-  },
-  "scripts": {
-    "test": "node --test pixel-diff.test.ts lfs.test.ts",
-    "typecheck": "tsc -p ."
   }
 }

@@ -45,7 +45,7 @@ export function Notice({ children, tone }: { children: ReactNode; tone?: "error"
 
 function Pane({ title, detail, fit, children }: { title: string; detail?: string; fit: boolean; children: ReactNode }) {
   return (
-    <figure className="min-w-0">
+    <figure className="min-w-0 flex-1 basis-[22rem]">
       <figcaption className="mb-1 flex items-baseline gap-2 text-xs">
         <strong className="text-foreground">{title}</strong>
         {detail ? <span className="text-muted-foreground">{detail}</span> : null}
@@ -114,7 +114,7 @@ export function ImageDiffView({ before, after, label }: { before: ImageSide; aft
   const percent = diff ? ((diff.changed / diff.total) * 100).toFixed(diff.changed && diff.changed < diff.total / 1000 ? 2 : 1) : null;
 
   return (
-    <div className="@container flex flex-col gap-3 p-3">
+    <div className="flex flex-col gap-3 p-3">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
         <span className="min-w-0 truncate font-medium text-foreground" title={label}>
           {label}
@@ -143,7 +143,7 @@ export function ImageDiffView({ before, after, label }: { before: ImageSide; aft
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-3 @min-[48rem]:grid-cols-3">
+      <div className="flex flex-wrap gap-3">
         <Pane title="Before" detail={dims(pair?.before)} fit={fit}>
           <SideImage side={before} fit={fit} alt={`Before: ${label}`} />
         </Pane>
