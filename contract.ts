@@ -1,6 +1,6 @@
 // Shared by server.ts, host.ts and app.tsx: resolving a Git LFS object to bytes.
-import { defineRpcContract } from "@get-bb/plugin-sdk";
 import { z } from "zod";
+import { defineContract } from "./git";
 
 const workspacePath = z
   .string()
@@ -17,12 +17,12 @@ const side = z.union([
   z.object({ outcome: z.literal("unavailable"), message: z.string() }),
 ]);
 
-export const hostContract = defineRpcContract({
+export const hostContract = defineContract({
   lfsObject: { input: z.object({ workspace: z.string().min(1), ...object }), output: side },
 });
 
 /** Callers name the environment directly, or the thread whose environment holds the file. */
-export const rpcContract = defineRpcContract({
+export const rpcContract = defineContract({
   lfsObject: {
     input: z
       .object({ environmentId: z.string().min(1).optional(), threadId: z.string().min(1).optional(), ...object })

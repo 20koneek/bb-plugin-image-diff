@@ -1,9 +1,16 @@
 // The slice of bb's bundled Git plugin (`bb--git`) RPC this plugin reads.
 // `bb plugin rpc inspect bb--git` prints the full schemas.
-import { defineRpcContract } from "@get-bb/plugin-sdk";
+import type { PluginRpcContract } from "@get-bb/plugin-sdk";
 import { z } from "zod";
 
 export const BB_GIT = "bb--git";
+
+/**
+ * Identity with inference, the same shape the SDK's contract helper returns.
+ * Declared here so app.tsx never imports the SDK root at runtime: git installs
+ * build the app bundle without devDependencies, where the SDK package lives.
+ */
+export const defineContract = <const C extends PluginRpcContract>(contract: C) => contract;
 
 export const gitTarget = z.discriminatedUnion("type", [
   z.object({ type: z.literal("uncommitted") }),
@@ -29,7 +36,7 @@ const changedFile = z.looseObject({
 });
 export type ChangedFile = z.infer<typeof changedFile>;
 
-export const git = defineRpcContract({
+export const git = defineContract({
   status: {
     input: z.object({ keys: z.array(z.string()) }),
     output: z.record(
